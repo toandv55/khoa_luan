@@ -1,0 +1,142 @@
+\newcommand{\rbfdf}{\cefr{t}{\T}\C}
+\newcommand{\rbffdf}{\left(\flfr{t}{\T} +1 \right)\C}
+
+%W_i,l
+\newcommand{\ws}{W'_{i, l}(t)}
+\newcommand{\wsh}{\widehat{W'}_{i, l}(t)}
+\newcommand{\WOhjp}[2]{\widehat{WO}_{#1}(#2)}
+\newcommand{\RH}[1]{\widehat{R}_{#1}}
+
+
+\def\tsuc{t^{suc}}
+\def\tpre{t^{pre}}
+\def\tint{t^{int}}
+
+\def\ti {t^{int}}
+\def \f {f(t)}
+\def \fp {f(t')}
+
+
+
+\newcommand{\fr}{fr(t)}
+\newcommand{\fo}{fo(t)}
+
+\newcommand{\frc}{FR(t)}
+\newcommand{\limdow}[2]{\lim_{#1\downarrow #2}}
+
+
+\def\Cs{C^s_i}
+\def\Ds{D^s_i}
+\def\Ts{T^s_i}
+\def\Js{J^s_i}
+\def\ds{d^s_i}
+\def\Us{U^s_i}
+
+% 15-05-13
+\def\ms{m^s_i}
+\def\Cps{C^s_{i,p}}
+\def\Fs{F^s_i}
+\def\Bs{B^s_i}
+\def\Fns{F^s_n}
+\def\Bns{B^s_n}
+
+\newcommand{\rbfs}{\text{\textsc{rbf}}^s(\tau_i, t)} 
+\newcommand{\rbfsp}[1]{\text{\textsc{rbf}}^s(\tau_{#1}, t)}
+\newcommand{\rbffs}{\text{\textsc{rbf}}'^s(\tau_i, t)}
+\newcommand{\rbffsp}[1]{\text{\textsc{rbf}}'^s(\tau_{#1}, t)} 
+
+%%%---26/5/2013
+
+\newcommand{\wrs}{wr^{s}_{i,l}(C,t)} 
+\newcommand{\wrst}[1]{wr^{s}_{i,l}(C,#1)} 
+%\newcommand{\wrp}[1]{wr_{i,l}(#1,t)}
+\newcommand{\wos}{wo^{s}_{i,l}(C,t)}
+\newcommand{\wost}[1]{wo^{s}_{i,l}(C,#1)} 
+%\newcommand{\wop}[1]{wo_i(#1,t)}
+\newcommand{\WRs}{WR^{s}_{i,l}(C)}
+\newcommand{\WOs}{WO^{s}_{i,l}(C)}
+\def\th{\widehat{t}}
+
+\newcommand{\WLjs}{WL^{s}_{i,l}} 
+\newcommand{\WLs}{WL^{s}_{i}} 
+\newcommand{\wls}{wl^{s}_{i}} 
+
+\newcommand{\Rs}{R^{s}_{i,l}} 
+\newcommand{\WRjs}{WR^{s}_{i,l}} 
+\newcommand{\WRts}{WR^{s}_{i}} 
+
+
+
+%%===============Hung define===========================
+\def\Ii{{IR}_{i}(C, t)}
+\def\IO{{IO}_{i}(t)}
+\def\IOi{{IO}_{i}(C, t)} % Thuong 23-05
+\def\IR{{IR}_{i}(t)}
+\def\IL{{IL}_{i}(t)}
+\newcommand{\wrht}[1]{\widehat{wr}_i(C,#1)}
+\newcommand{\woht}[1]{\widehat{wo}_i(C,#1)}
+\newcommand{\WOht}[1]{\widehat{WO}_n(#1)}
+\newcommand{\wohtf}[1]{\widehat{wo}_n(#1)}
+
+
+%%===============firstlast===========================
+\def\Rhh{\widehat{R}_{i,h}}
+\def\WRhh{\widehat{WR}_{i,h}}
+\def\WLih{\widehat{WL}_{i,h}}
+\def\WRihc{\widehat{WR}_{i,h}(C)}
+\def\whc{\widehat{wr}_{i,h}(C, t)}
+
+\def\Rnl{\widehat{R}_{n,l}}
+\def\Rnh{\widehat{R}_{n,h}}
+\def\WRnl{\widehat{WR}_{n,l}}
+\def\WRnh{\widehat{WR}_{n,h}}
+\def\WOnl{\widehat{WO}_{n,l}(-F_n)}
+\def\WOnh{\widehat{WO}_{n,h}(-F_n)}
+\def\wonl{\widehat{wo}_{n,l}(-F_n, t)}
+\def\wonh{\widehat{wo}_{n,h}(-F_n, t)}
+
+%%=============================================macro_inv
+
+\def\pii{\left(t_{a-1},t_a\right]}
+\def\ta{t_a}
+\def\taa{t_{a-1}}
+\def\ita{I_i(t_a)}
+\def\ilta{IL_i(t_a)}
+
+\newcommand{\lja}{lastJ_a}
+\newcommand{\laa}{lastA_a}
+\newcommand{\ljp}[1]{lastJ_{#1}}
+\newcommand{\lasp}[1]{lastA_{#1}}
+
+\newcommand{\fia}{first_a}
+\newcommand{\lasa}{last_a}
+\newcommand{\q}{q_a}
+
+\newcommand{\maxj}{maxJ_a}
+\newcommand{\maxa}{maxA_a}
+
+\newcommand{\maxjp}[1]{maxJ_{#1}}
+\newcommand{\maxap}[1]{maxA_{#1}}
+
+\newcommand{\lj}{lastJ}
+\newcommand{\las}{lastA}
+\newcommand{\wrhta}{\widehat{wr}_{i,l}(C,t_a)}
+\newcommand{\wrhtaa}{\widehat{wr}_{i,l}(C,t_{a-1})}
+\newcommand{\wohta}{\widehat{wo}_{i,l}(C,t_a)}
+\newcommand{\wohtaa}{\widehat{wo}_{i,l}(C,t_{a-1})}
+
+%%=============================================macro_Dat
+
+\newcommand{\WRjhp}[1]{\widehat{WR}_{i,#1}}
+
+% de bo di sau nay
+\newcommand{\tab}[1]{\hspace{.2\textwidth}\rlap{#1}}
+
+\newcommand{\wta}[1]{\widehat{W}_{i,l}(#1)}
+
+\newcommand{\wrhit}{\widehat{wr}_{i}(t)}
+\newcommand{\wrhitp}[1]{\widehat{wr}_{i}(#1)}
+%\newcommand{\WRjhp}[1]{\widehat{WR}_{i,#1}}
+
+\newcommand{\sumlimitp}[1]{\sum\limits_{j<i}\left(#1\right)}
+\newcommand{\sumlimitpp}[2]{\sum\limits_{j<i,#1}\left(#2\right)}

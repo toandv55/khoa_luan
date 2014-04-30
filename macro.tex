@@ -1,0 +1,384 @@
+
+%=============================================================================================================================
+% NEW THEOREMS, ENVIRONMENTS, COMMANDS
+
+\newtheorem{definition}{Định nghĩa}
+\newtheorem{lemma}{Bổ đề}
+\newtheorem{theorem}{Định lý}
+
+%
+\def \bp{khoảng bận rộn mức-$i$}
+\def \bph{khoảng bận rộn xấp xỉ mức-$i$}
+\def \fea{thực hiện được}
+\def \wcrt {$wcrt$}
+\def \at{test xấp xỉ}
+\def \ss{hệ thống với độ ưu tiên cố định}
+\def\cd{kỳ hạn ràng buộc}
+\def\ad{kỳ hạn không ràng buộc}
+\def \fp{độ ưu tiên cố định}
+
+% 15-05-13
+\def \ap{khoảng hoạt động mức-$i$}
+\def \apj{khoảng hoạt động mức-$(i,l)$}
+\def \aph{khoảng hoạt động xấp xỉ mức-$i$}
+\def \apjh{khoảng hoạt động xấp xỉ mức-$(i,l)$}
+
+%end
+%22-05
+\def \pi {khoảng nguyên tố}
+\def \rf {hàm đáp ứng}
+\def \of {hàm chiếm dụng}
+
+
+%=============================================================================================================================
+%
+\newcommand{\drop}[1]{} % Comment multi-line
+\newcommand{\pr}[1]{{\color{black} #1}} 
+\newcommand{\clast}[1]{{\color{black} #1}}
+\newcommand{\cclast}[1]{{\color{black} #1}}
+%\newcommand{\nfstrike}[1]{{\color{black}\sout{#1}}} can be blue yellow green red
+\newcommand{\chau}[1]{{\color{black} #1}}
+\newcommand{\chaumoi}[1]{{\color{black} #1}}
+\newcommand{\ccuoi}[1]{{\color{black} #1}}
+\newcommand{\chaunua}[1]{{\color{black} #1}}
+\newcommand {\khue} [1]{{\color{black} #1}}
+\newcommand {\thanh} [1]{{\color{black} #1}}
+\newcommand {\abc} [1]{{\color{yellow} #1}}
+%============================================================================
+
+\newcommand{\FP}{{\sc fp}}
+\newcommand{\DM}{{\sc dm}}
+\newcommand{\RM}{{\sc rm}}
+\newcommand{\RMA}{{\sc rta}}
+\newcommand{\PDA}{{\sc pda}}
+\newcommand{\RTA}{{\sc rta}}
+\newcommand{\edf}{\textsc{edf}}
+\newcommand{\WCET}{{\sc wcet}}
+\newcommand{\WCOT}{{\sc wcot}}
+\newcommand{\WF}{{\sc wf}}
+\newcommand{\AS}{{\sc as}}
+\newcommand{\NP}{{\sc np}}
+\newcommand{\PTAS}{{\sc ptas}}
+\newcommand{\FPTAS}{{\sc fptas}}
+\newcommand{\bigOh}{\mathcal{O}}
+\newcommand{\bigO}{\mathcal{O}}
+
+%============================================================================
+%marking: pour rapport, il faut définir, pour article, il ne faut pas. 
+\drop{\newcommand{\bdiv}{\mbox{~div~}}
+\newcommand{\qed}{\rule{7pt}{7pt}}}
+
+% "box" symbols at end of s
+\def\QEDclosed{\mbox{\rule[0pt]{1.3ex}{1.3ex}}} % for a filled box
+% V1.6 some journals use an open box instead that will just fit around a closed one
+\def\QEDopen{{\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.2pt}\fbox{\rule[0pt]{0pt}{1.3ex}\rule[0pt]{1.3ex}{0pt}}}}
+\def\QED{\QEDclosed} % default to closed
+\def\proof{\noindent{\itshape Chứng minh: }}
+\def\endproof{\hspace*{\fill}~\QED\par\endtrivlist\unskip}
+
+%======================================================================================
+
+\newenvironment{exam}{\begin{exa} \rm}{\hspace*{\fill}$\qed$\end{exa}}
+\newenvironment{Example}{\begin{exa} \rm}{\hspace*{\fill}$\qed$\end{exa}}
+\newenvironment{Proof}{\noindent{\bf Chứng minh : }}{\qed}
+\newenvironment{Pro}{\noindent{ \textit{Chứng minh.} }}{\qed}%Chau 18-04 bo \bf, them \textit, bo :, them .
+\newenvironment{LabelledProof}[1]{\noindent{\bf Proof of #1}}{}%{\qed}
+\newenvironment{LabelledSketch}[1]{\noindent{\bf Sketch of proof of #1: }}{}%{\qed}
+\newenvironment{Sketch}{\noindent{\bf Sketch of proof: }}{}%{\qed}
+\newcommand{\beginProof}[1]{\noindent{\bf Chứng minh:}}
+\newcommand{\finishProof}[1]%
+{~\newline \noindent{\bf \qed\   End of Proof} (de {\bf #1}).\newline}
+\newcommand{\ProofSpace}{\medskip}
+
+%========================================================================================
+\newtheorem{Def}{Định nghĩa} % Dinh nghia
+\newtheorem{Coro}{Hệ quả} % He qua
+\newtheorem{Th}{Định lý} % Dinh ly
+\newtheorem{Le}{Bổ đề} % Bo de
+\newtheorem{Prop}{Property}
+\newtheorem{exa}{Ví dụ}
+\newtheorem{Rmk}{Remark}
+\newtheorem{proo}{Chứng minh} %Chung minh
+
+
+%====================================================================================
+\def\sec{\section}
+\def\ssec{\subsection}
+\def\sssec{\subsubsection}
+\def\ssssec{\subsubsubsection}
+\def\para{\paragraph}
+\def\spara{\subparagraph}
+
+%18-04 Chau sua lai het cac beg
+\def\begdef{\begin{definition}}
+\def\enddef{\end{definition}}
+\def\begth{\begin{theorem}}
+\def\endth{\end{theorem}}
+\def\begle{\begin{lemma}}
+\def\endle{\end{lemma}}
+\def\begco{\begin{corollary}}
+\def\endco{\end{corollary}}
+\def\begpreu{\begin{proof}}
+\def\begpro{\begin{Pro}}
+\def\endpreu{\end{proof}}
+\def\endpro{\end{Pro}}
+\def\begprop{\begin{Prop} }
+\def\endprop{\end{Prop}}
+\def\begex{\begin{example}}
+\def\endex{\end{example}}
+\def\begrmq{\begin{Rmk}}
+\def\endrmq{\end{Rmk}}
+\def\begrmk{\begin{Rmk}}
+\def\endrmk{\end{Rmk}}
+\def\begdes{\begin{description} \item[] }
+\def\enddes{\end{description}}
+\def\begsket{\begin{Sketch}  }
+\def\endsket{\end{Sketch}}
+
+\def\begeq{\begin{equation}  }
+\def\endeq{\end{equation}}
+\def\begeqno{\begin{equation*}  }
+\def\endeqno{\end{equation*}}
+\def\begarr{\begin{eqnarray}}
+\def\endarr {\end{eqnarray}}
+\def\begarrno{\begin{eqnarray*}}
+\def\endarrno {\end{eqnarray*}}
+\def\begsubeq{\begin{subequations}  }
+\def\endsubeq{\end{subequations}}
+\def\begsubeqno{\begin{subequations*}  }
+\def\endsubeqno{\end{subequations*}}
+%\def\bega{\begin{gather}}
+%\def\endga {\end{gather}}
+
+%===============================================================================
+%18-04 Chau sua lai tat refence rut gon
+\newcommand {\rchap}[1]{\ref{#1}}
+\newcommand {\rdef}[1]{ \ref{#1}}
+\newcommand {\rth}[1]{ \ref{#1}}
+\newcommand {\rle}[1]{\ref{#1}}
+\newcommand {\rco}[1]{Corollary \ref{#1}}
+\newcommand {\req}[1]{(\ref{#1})}
+\newcommand {\rsec}[1]{Sect. \ref{#1}}
+\newcommand {\rssec}[1]{Subsect. \ref{#1}}
+\newcommand {\rsssec}[1]{Subsubsect. \ref{#1}}
+\newcommand {\rfig}[1]{\ref{#1}}
+\newcommand {\rtab}[1]{Table \ref{#1}}
+\newcommand {\rex}[1]{Example \ref{#1}}
+
+%=================================================================================
+\newcommand{\equals}{\stackrel{\operatorname{def}}{=}}
+\newcommand{\sig}[1]{\sum_{#1}}
+\newcommand{\flfrac}[2]{\left\lfloor\frac{#1}{#2}\right\rfloor}
+\newcommand{\cefrac}[2]{\left\lceil\frac{#1}{#2}\right\rceil}
+\newcommand{\flfr}[2]{\left\lfloor\frac{#1}{#2}\right\rfloor}
+\newcommand{\cefr}[2]{\left\lceil\frac{#1}{#2}\right\rceil}
+\newcommand{\ce}[1]{\left\lceil #1 \right\rceil}
+\newcommand{\fl}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\lef}{\left\{}% pre-defined
+\newcommand{\ri}{\right\}}
+\newcommand{\exc}{\backslash}
+\newcommand{\infer}{\Longrightarrow}
+\newcommand{\equi}{\Longleftrightarrow}
+\newcommand{\ud}{\mathrm{d}}
+
+\newcommand{\limup}[1]{\lim_{t\uparrow #1}}
+\newcommand{\limdown}[1]{\lim_{t\downarrow #1}}
+%=============================================================================
+
+\def\Ti{{\textsc{{T}}}_{i}}% 20-04 Chau tu sc thanh mbox
+\def\Ttt{\textsc{{H}}}%_{t_1, t_2}} %14-03 Chau 20-04 Chau tu sc thanh mbox
+
+\def\t{\tau_i}
+\newcommand{\tp}[1]{\tau_{#1}}
+\newcommand{\job}{\tau_{i,l}}
+\newcommand{\jp}[1]{\tau_{i,#1}}
+\newcommand{\jpp}[2]{\tau_{#1,#2}}   
+
+%\def\r{r_i}
+%\def\ri{r_i}
+\def\C{C_i}
+\def\D{D_i}
+%\def\d{d_i}
+\def\T{T_i}
+\def\U{U_i}
+\def\J{J_i} 
+\def\F{F_i}
+\def\B{B_i}
+
+\def\Cp{C_{i,p}}
+
+\def\Fn{F_n}
+\def\Bn{B_n}
+
+\def\m{m_i}
+
+
+%==========================================================================
+
+\newcommand{\rbf}{\text{\textsc{rbf}}(\tau_i, t)} 
+\newcommand{\rbfp}[1]{\text{\textsc{rbf}}(\tau_{#1}, t)}
+
+\newcommand{\rbfP}{\dddot{\text{\textsc{rbf}}} (\tau_i, t)}
+\newcommand{\rbfPp}[1]{\dddot{\text{\textsc{rbf}}} (\tau_{#1}, t)}
+
+\newcommand{\rbftp}[1]{\wildetilde{\text{\textsc{rbf}}}(\tau_{#1},t)}
+
+
+% 15-05-13
+\newcommand{\rbff}{\text{\textsc{rbf}}'(\tau_i, t)} 
+\newcommand{\rbffp}[1]{\text{\textsc{rbf}}'(\tau_{#1}, t)} 
+
+\newcommand{\rbfh}{\widehat{\text{\textsc{rbf}}}(\tau_i, t)}
+\newcommand{\rbfhp}[1]{\widehat{\text{\textsc{rbf}}}(\tau_{#1}, t)}
+
+\newcommand{\rbffh}{\widehat{\text{\textsc{rbf}}'}(\tau_i, t)} 
+\newcommand{\rbffhp}[1]{\widehat{\text{\textsc{rbf}}'}(\tau_{#1}, t)}
+
+
+%======================================================================================
+
+\newcommand{\w}{W_{i, l}(t)}
+\newcommand{\wh}{\widehat{W}_{i, l}(t)}
+\newcommand{\wt}{\widetilde{W}_{i, l}(t)}
+% Thuong modify - 1/3/2013
+\newcommand{\whi}{\widehat{W}_{i}(t)}
+\newcommand{\wi}{W_{i}(t)}
+
+\newcommand{\wj}[1]{W_{i, #1}(t)}         %\wp is alreadly defined
+\newcommand{\whp}[1]{\widehat{W}_{i, #1}(t)}
+\newcommand{\wtp}[1]{\widetilde{W}_{i, #1}(t)}
+
+\newcommand{\wpp}[2]{W_{#1, #2}(t)}
+\newcommand{\whpp}[2]{\widehat{W}_{#1, #2}(t)}
+\newcommand{\wtpp}[2]{\widetilde{W}_{#1, #2}(t)}
+
+\newcommand{\W}{W_i(t)}
+\newcommand{\Wh}{\widehat{W}_i(t)}
+\newcommand{\Wt}{\widetilde{W}_i(t)}
+
+\newcommand{\Wp}[1]{W_{#1}(t)}
+\newcommand{\Whp}[1]{\widehat{W}_{ #1}(t)}
+\newcommand{\Wtp}[1]{\widetilde{W}_{ #1}(t)}
+
+\newcommand{\s}{S_i}
+\newcommand{\sh}{\widehat{S}_i}
+\newcommand{\st}{\widetilde{S}_i}
+
+%======================================================================================
+\drop
+{
+\newcommand{\la}{\text{\textsc{la}}^{BB}(\tau_i, t)}
+\newcommand{\lap}[1]{\text{\textsc{la}}^{BB}(\tau_{#1}, t)}
+
+\newcommand{\lan}[1]{\text{\textsc{la}}_{#1}(\tau_i, t)}
+\newcommand{\lanp}[2]{\text{\textsc{la}}_{#1}(\tau_{#2}, t)}
+
+%Bo di cung duoc: chac ko? Ko, chi 3 cai cuoi (trong article  ni) duoc 
+\newcommand{\LA}{\text{\textsc{la}}^{BB}(\tau_i, t)}
+\newcommand{\LAp}[1]{\text{\textsc{la}}^{BB}(\tau_{#1}, t)}
+\newcommand{\LAn}[1]{\text{\textsc{la}}_{#1}(\tau_i, t)}
+\newcommand{\LAnp}[2]{\text{\textsc{la}}_{#1}(\tau_{#2}, t)}
+
+\newcommand{\LA}{\text{\textsc{la}}(\tau_i, t)}
+\newcommand{\LAp}[1]{\text{\textsc{la}}(\tau_{#1}, t)}
+}
+
+\newcommand{\delt}{\delta(\tau_i, t)}
+\newcommand{\lamb}{\lambda(\tau_i, t)}
+\newcommand{\gamm}{\gamma(\tau_i, t)}
+\newcommand{\delp}[1]{\delta(\tau_{#1}, t)}
+\newcommand{\lamp}[1]{\lambda(\tau_{#1}, t)}
+\newcommand{\gamp}[1]{\gamma(\tau_{#1}, t)}
+
+\newcommand{\RBF}{\text{\textsc{rbf}}} 
+\newcommand{\RBFp}{\dddot{\text{\textsc{rbf}}}}
+\newcommand{\RBFh}{\widehat{\text{\textsc{rbf}}}}
+\newcommand{\RBFt}{\wildetilde{\text{\textsc{rbf}}}}
+\newcommand{\LAC}{\text{\textsc{la}}^{BB}}
+\newcommand{\DBF}{\text{\textsc{dbf}}}
+
+%================================================================================
+
+%%sensitive part
+\drop{\newcommand{\inti}{t^{int}_i}% \int is pre-defined
+\newcommand{\inth}{\hat{t}^{int}_i}
+\newcommand{\intj}{t^{int}_{i, l}}
+\newcommand{\intjh}{\hat{t}^{int}_{i, l}}
+\newcommand{\intjhp}[1]{\hat{t}^{int}_{i, #1}}
+}
+%% in this article i denote t^{int} by R or define R as t^{int}, in other articles 
+%%\inti and so on should be defined like the dropped part above  
+\newcommand{\inti}{R_i}% cause \int is pre-defined
+\newcommand{\inth}{\widehat{R}_i}% 13-04 Chau hat-> widehat
+\newcommand{\intj}{R_{i, l}}
+\newcommand{\intjh}{\widehat{R}^{int}_{i, l}}% 13-04 Chau hat-> widehat
+\newcommand{\intjhp}[1]{\widehat{R}_{i, #1}}% 13-04 Chau hat-> widehat
+
+\def\R{R_i}
+\newcommand{\Rp}[1]{{R_i}^{(#1)}}
+%\newcommand{\Rub}{R^\mathsf{ub}}
+
+\def\Rj{R_{i,l}}
+\def\Rjh{\widehat{R}_{i,l}}
+\newcommand{\Rjp}[1]{R_{i,#1}}
+\newcommand{\Rjpp}[2]{R_{#1,#2}}
+\newcommand{\Rjhp}[1]{\widehat{R}_{i,#1}}
+\newcommand{\Rjhpp}[2]{\widehat{R}_{#1,#2}}
+
+\def\N{N_{i}}
+\def\Nh {\widehat{N}_i} % mark 13-4 Chau hat-> widehat
+
+
+\def\Rh{\widehat{R}_{i,l}}
+%%======================= Thuong modify ===============================
+%\newcommand{\keywords}[1]{\par\addvspace\baselineskip
+%\noindent\keywordname\enspace\ignorespaces#1}
+%\newcommand{\whi}{\widehat{W}_{i}(t)}% already defined
+%\newcommand{\wi}{W_{i}(t)}% defined
+\newcommand{\lw}{\textit{last\_active}}
+\newcommand{\rbfhj}{\widehat{\text{\textsc{rbf}}}(\tau_j, t)}
+\newcommand{\rig}{\right\}}
+\def\RTih{\widehat{RT}_{i}}
+\def\RTl{\widehat{RT}_{i,l}}
+\def\RTh{\widehat{RT}_{i,h}}
+\def\I{{I}_{i}(t)}
+\def\Ia{{I}_{i}(t_a)}
+\def\Rhl{\widehat{R}_{i,l}}
+\def\Rhh{\widehat{R}_{i,h}}
+\def\cri{\hat{t}^*}
+\def\Cs{C^s_i}
+\def\Ts{T^s_i}
+\def\Ds{D^s_i}
+\def\Js{J^s_i}
+\newcommand{\wc}{\textit{wcrt}} 
+\def\tB{t^{bound}=\max_{j < i}\left\{(k-1)T_j - J_j\right\}}
+\def\Rjs {R^s_{i,l}}
+\def\RTjs {RT^s_{i,l}}
+\def\RTs {RT^s_{i}}
+\def\Ns {N^s_{i}}
+
+%%======================= Manh modify ===============================
+
+\newcommand{\Wm}[1]{{W_i}^{(#1)}}
+\newcommand{\Wml}[1]{{W_{i,l}}^{(#1)}}
+\newcommand{\Wmm}[2]{{W_{i,#1}}^{(#2)}}
+\def\Cj{C_j}
+\def\Uj{U_j}
+
+
+%them 05-04-2013
+\def\RT{RT_i}
+\def\RTh{\widehat{RT}_{i}}
+\def\RTj {RT_{i,l}}
+\def\RTjh{\widehat{RT}_{i,l}}
+\newcommand{\RTjp}[1]{RT_{i,#1}}
+\newcommand{\RTjpp}[2]{RT_{#1,#2}}
+\newcommand{\RTjhp}[1]{\widehat{RT}_{i,#1}}
+\newcommand{\RTjhpp}[2]{\widehat{RT}_{#1,#2}}
+
+\def\ac{last\_active_{a}}
+\newcommand{\acp}[1]{last\_active_{#1}}
+\newcommand{\whtp}[1]{\widehat{W}_{i, l}(#1)}
+\newcommand{\wpt}[1]{{W}_{i, l}(#1)}
+
+%=================================================================================

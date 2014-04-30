@@ -1,0 +1,24 @@
+\chapter{Kĩ nghệ phần mềm hướng thành phần}
+
+\section{Các thành phần cơ bản}
+Kĩ nghệ phần mềm hướng thành phần là một cách hiệu quả, hướng tới tính tái sử dụng dùng cho việc phát triển các hệ
+thông phần mềm thương mại. Một hệ thống hướng thành phần được tạo thành bởi sự lắp ghép và tương tác của các thành phần phần mềm độc lập. Kĩ nghệ phần mềm hướng thành phần bao gồm một số thành phần cơ bản sau :
+\begin{enumerate}
+  \item Các thành phần phần mềm - là các thành phần độc lập được xác định bởi giao diện của chúng. Giao diện và cài đặt cần được tách biệt,
+	và phần cài đặt của một thành phần có thể được thay thế bởi một cài đặt khác mà không làm ảnh hưởng tới các thành phần khác. 
+  \item Các chuẩn thành phần - hỗ trợ việc việc tích hợp các thành phần với nhau. Các chuẩn này được quy định trong một mô hình thành phần, các chuẩn định nghĩa cách các giao diện được xác định và cách các thành phần giao tiếp với nhau.
+  \item Các thành phần trung gian (middleware) - cung cấp các phần mềm hỗ trợ việc tích hợp các thành phần. Để giúp các thành phần phần mềm độc lập và phân tán làm việc với nhau thì sự hỗ trợ từ các thành phần trung gian trong việc xử lý các giao tiếp, tương tác là cần thiết. Bên cạnh đó các thành phần trung gian còn có thể cung cấp các trợ giúp cho việc cấp phát tài nguyên, quản lý giao dịch, bảo mật, và xử lý đa luồng.  
+	\item Một quy trình phát triển được thiết kế phù hợp cho kĩ nghệ phần mềm hướng thành phần.
+\end{enumerate}
+\section{Các thành phần phần mềm và mô hình thành phần}
+\subsection{Các thành phần phần mềm}
+Một thành phần phần mềm là một đơn vị phần mềm độc lập mà có thể được lắp ghép cùng với các thành phần khác để tạo lên một hệ thống phần mềm hoàn chỉnh. Các thành phần phần mềm có những đặc điểm chính như sau : 
+\begin{enumerate}
+  \item Được chuẩn hóa - Các thành phần phần mềm phải tuân theo các chuẩn quy định trong một mô hình thành phần, trong đó cách các giao diện được định nghĩa, thông tin mô tả, tài liệu, sự cấu thành và triển khai các thành phần được quy định.
+	\item Tính độc lập - Một thành phần phần mềm nên độc lập, điều đó có nghĩa một thành phần có thể lắp ghép và triển khai mà không cần sử dụng tới các thành phần khác, trong trường hợp cần sự hỗ trợ từ thành phần khác thì điều này phải được định rõ trong đặc tả của giao diện.
+	\item Có thể lắp ghép - Tất cả các tương tác với bên ngoài đều phải được thông qua giao diện một cách công khai.
+	\item Có thể triển khai - Các thành phần phần mềm phải là tự đóng gói, điều này có nghĩa là một thành phần có thể hoạt động như một thực thể độc lập trên một nển tảng hỗ trợ cung cấp cài đặt cho một mô hình phần mềm.
+	\item Được làm tài liệu - Các thành phần phải được làm tài liệu đầy đủ để hỗ trợ người dùng quyết định được thành phần nào phù hợp với yêu cầu sử dụng. Ngoài ra, cú pháp và ngữ nghĩa của các giao diện thành phần cũng cần được xác định.
+\end{enumerate}
+\section{Các thành phần phần mềm và mô hình thành phần}
+\subsection{Các thành phần phần mềm}
