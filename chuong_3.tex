@@ -1,5 +1,45 @@
-\chapter{Giới thiệu OSGi}
- giới thiệu, lịch sử
+\chapter{Công nghệ OSGi và kĩ nghệ phần mềm hướng thành phần}
+Ở chương này công nghệ OSGi sẽ được giới thiệu và cách thức OSGi hỗ trợ trong kĩ nghệ phần mềm hướng thành phần.  
+
+\section{Giới thiệu về OSGi}
+Công nghệ OSGi - Open Service Gateway initiative, là mộ tập hợp các đặc tả định nghĩa một hệ thống thành phần cho nền tảng phát triển phần mềm Java. Những đặc tả này tạo lên một mô hình phát triển trong đó các hệ thống phần mềm được hợp thành một cách linh động từ các thành phần phần mềm có tính tái sử dụng. Các đặc tả của công nghệ OSGi cho phép các thành phần phần mềm che giấu đi các cài đặt bên trong mà chỉ giao tiếp với các thành phần khác thông qua các dịch vụ. Các dịch vụ này được chia sẻ một cách rõ ràng và xác định giữa các thành phần với nhau. Mô hình trên tuy đơn giản nhưng đã mang lại hiệu quả lớn trong hầu hết các khía cạnh trong quy trình phát triển phần mềm.
+
+Mặc dù kĩ nghệ phần mềm hướng thành phần, cũng như các thành phần đã được đề xuất từ rất lâu, cuối những năm 1990 \cite{component-based-ian} tuy nhiên những ưu điểm của của hướng phát triển này vẫn chưa được áp dụng thành công nhiều trong việc phát triển phần mềm. Công nghệ OSGi là công nghệ đầu tiên thực sự thành công với với việc xây dựng các hệ thống hướng thành phần mà giải quyết được rất nhiều vấn đề thực tế trong phát triển phần mềm. Áp dụng công nghệ OSGi giúp việc giảm đi khá nhiều độ phức tạp trong quá trình phát triển. Mã nguồn dễ viết hơn, dễ kiểm thử hơn, tính tái sử dụng được nâng cao, xây dựng hệ thống trở lên đơn giản hóa hơn rất nhiều, việc triển khai các hệ thông trở lên dễ kiểm soát hơn, các lỗi dễ phát hiện sớm, môi trường thực thi cung cấp rất nhiều sự quan sát tới việc các thành phần nào đang hoạt động. Công nghệ OSGi đã được sử dụng, thẩm định và chấp nhận trong nhiều hệ thống phần mềm phổ biến như Eclipse và Spring.\cite{whatisosgi}
+
+Phiên bản đặc tả đầu tiên của công nghệ OSGi được phát hành vào năm 2000, phiên bản đặc tả hiện tại này là 5.0.0. Từ phiên bản 4.2 phát hành năm 2010, OSGi đã có thêm một phiên bản thương mại, Enterprise OSGi, phục vụ cho việc xây dựng các hệ thống thương mại bằng cách tích hợp các công nghệ của nền tảng Java Enterprise Edition (JEE) bên cạnh phiên bản cơ bản là Core OSGi \cite{specs}.
+
+Nói một ngắn gọn, công nghệ OSGi cung cấp một mô hình phát triển hiện thực hóa được các ưu điểm của mô hình phát triển hướng thành phần.
+
+\section{Mô hình nhiều lớp của OSGi}
+
+OSGi có một mô hình nhiều lớp \cite{whatisosgi} được thể hiện trong hình \ref{fig:layers}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/layers.JPG}
+	\caption{Mô hình nhiều lớp của OSGi}
+	\label{fig:layers}
+\end{figure}
+
+
+Dưới đây là mô tả sơ lược cho các lớp trong hình \ref{fig:layers}
+\begin{itemize}
+	\item Bundles - Là thành phần phần trong OSGi được phát triển với lập trình viên, là thành phần tạo lên các hệ thống phần mềm dựa trên OSGi, một thành phần gọi là một bundle.
+	\item Services - Lớp có nhiệm vụ kết nối các thành phần một cách linh động, tìm và gắn kết các dịch vụ (là các đối tượng trong ngôn ngữ lập trình Java),  giúp các thành phần có thể giao tiếp và cộng tác với nhau.
+	\item Life-Cycle - Là lớp cung cấp cách thức quản lý các thành phần như việc thêm mới một thành phần, khởi động, dừng hoạt động, cập nhật hay gỡ bỏ.
+	\item Modules - Là lớp định nghĩa cách thức các thức một bundle sử dụng mã nguồn từ bundle khác cũng như cách đưa mã nguồn ra bên ngoài để được sử dụng bởi các bundle khác. 	
+	\item  Security - Là lớp xử lý các vấn đề liên quan tới bảo mật.
+	\item  Execution Environment - Cung cấp môi trường thực thi cho các thành phần có thể hoạt động.
+\end{itemize}
+
+\section{OSGi hỗ trợ kĩ nghệ phần mềm hướng thành phần}
+Ở trong mục 2.1 của chương 2 các thành phần cơ bản của kĩ nghệ phần mềm bao gồm :
+\begin{enumerate}
+	\item Các thành phần phần mềm
+	\item Các chuẩn thành phần
+	\item Các thành phần trung gian - Middleware
+	\item Một quy trình phát triển
+\end{enumerate}
+
  How does OSGI support component-based... and modularity.
 advantages over pure Java
  Types(?) of OSGIs

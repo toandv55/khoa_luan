@@ -1,4 +1,4 @@
-\chapter{Kĩ nghệ phần mềm hướng thành phần}
+\chapter{Kĩ nghệ phần mềm hướng thành phần \cite{component-based-ian}}
 
 \section{Các thành phần cơ bản}
 Kĩ nghệ phần mềm hướng thành phần là một cách hiệu quả, hướng tới tính tái sử dụng dùng cho việc phát triển các hệ
@@ -37,7 +37,7 @@ Từ cách tiếp cận trên, thì các thành phần phần mềm sẽ có hai
   \item Giao diện cung cấp - định nghĩa các dịch vụ cần phải cung cấp để một thành phần trong một hệ thống hoạt động một cách đúng đắn. Nếu các dịch vụ này không sẵn sàng để cung cấp thì thành phần yêu cầu chúng sẽ không hoạt động. Điều này không làm giảm đi tính độc lập cũng như khả năng triển khai của một thành phần phần mềm, bởi vì các giao diện yêu cầu này không định nghĩa cách các dịch vụ được cung cấp như thế nào mà chỉ định rõ các dịch vụ nào cần phải được cung cấp.
 \end{itemize}
 Hình \ref{fig:component_a} là mô hình UML của một thành phần phần mềm và hai loại giao diện của một thành phần.
-	\begin{figure}[bp]
+	\begin{figure}[htbp]
 		\centering
 			\includegraphics{image/component_a.JPG}
 		\caption{Hai loại giao diện của một thành phần}
@@ -46,7 +46,7 @@ Hình \ref{fig:component_a} là mô hình UML của một thành phần phần m
 	
 Các giao diện yêu cầu của một thành phần có thể được nối với giao diện cung cấp của một thành phần trong mô hình UML để thể hiện việc sử dụng dịch vụ giữa thành phần. Ví dụ, với một hệ thống xử lí dữ liệu gồm thành phần, một thành phần có nhiệm vụ thu thập dữ liệu, một thành phần có nhiệm vụ xử lý dữ liệu vào đưa ra báo cáo. Thành phần đưa ra báo cáo sẽ lấy dữ liệu từ thành phần cung cấp dữ liệu. Hình \ref{fig:data_process} mô tả việc cung cấp dịch vụ từ một thành phần cho thành phần khác có thể hoạt động.
 
-\begin{figure}
+\begin{figure}[htbp]
 	\centering
 		\includegraphics{image/data_process.JPG}
 	\caption{Sử dụng dịch vụ giữa hai thành phần}
@@ -65,5 +65,14 @@ Một mô hình phần mềm lý tưởng sẽ gồm các phần cơ bản như 
 	\item Cách triển khai - Một mô hình thành phần cần cung cấp một đặc tả về cách các thành phần được đóng gói cho việc triển khai một cách độc lập. Ngoài ra các một mô hình phần mềm phần mềm cũng có các quy tắc quy định khi nào việc thay thế một thành phần được phép thực hiện. 
 	
 \end{enumerate}
+
+\section{Quy trình phát triển hướng thành phần}
+Trong phát triển phần mềm hướng thành phần có hai loại quy trình phát triển đó là :
+\begin{enumerate}
+\item Phát triển cho tái sử dụng - Là quy trình phát triển liên quan tới việc phát triển các thành phần phần mềm mà sẽ được sử dụng trong các hệ thống phần mềm khác.
+\item Phát triển với việc tái sử dụng - Là quy trình phát triển các hệ thống mới từ các thành phần phần mềm đã có sẵn.
+\end{enumerate}
+
+
 
 
