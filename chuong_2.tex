@@ -18,7 +18,52 @@ Một thành phần phần mềm là một đơn vị phần mềm độc lập 
 	\item Tính độc lập - Một thành phần phần mềm nên độc lập, điều đó có nghĩa một thành phần có thể lắp ghép và triển khai mà không cần sử dụng tới các thành phần khác, trong trường hợp cần sự hỗ trợ từ thành phần khác thì điều này phải được định rõ trong đặc tả của giao diện.
 	\item Có thể lắp ghép - Tất cả các tương tác với bên ngoài đều phải được thông qua giao diện một cách công khai.
 	\item Có thể triển khai - Các thành phần phần mềm phải là tự đóng gói, điều này có nghĩa là một thành phần có thể hoạt động như một thực thể độc lập trên một nển tảng hỗ trợ cung cấp cài đặt cho một mô hình phần mềm.
-	\item Được làm tài liệu - Các thành phần phải được làm tài liệu đầy đủ để hỗ trợ người dùng quyết định được thành phần nào phù hợp với yêu cầu sử dụng. Ngoài ra, cú pháp và ngữ nghĩa của các giao diện thành phần cũng cần được xác định.
+	\item Được làm tài liệu - Các thành phần phải được làm tài liệu đầy đủ để hỗ trợ người dùng quyết định được thành phần nào phù hợp với yêu cầu sử dụng.
 \end{enumerate}
-\section{Các thành phần phần mềm và mô hình thành phần}
-\subsection{Các thành phần phần mềm}
+
+Các thành phần phần mềm được coi là một đơn vị cung cấp một hoặc nhiều các dịch vụ. Khi một hệ thống cần một dịch vụ, thành phần cung cấp dịch vụ đó sẽ được gọi đến, tuy nhiên hệ thống không cần quan tâm tới thành phần đó được chạy ở đâu, ngôn ngữ lập trình nào được sử dụng để phát triển lên thành phần đó.
+
+Từ cách nhìn một thành phần phần mềm như một đơn vị cung cấp dịch vụ, thì mỗi thành phần phần mềm có tính tái sử dụng sẽ gồm hai đặc điểm chính sau :
+
+\begin{enumerate}
+  \item Mỗi thành phần phần mềm là một thực thể có thể chay được hay thực thi được và được định nghĩa bởi giao diện của chúng. Người dùng không cần biết chi tiết cài đặt của thành phần phần mềm để sử dụng. Dịch vụ cung cấp bởi một thành phần có thể được sử dụng bởi các thành khác hoặc cũng có thể sử dụng ngay bên trong chính thành phần đó.
+	\item Các dịch vụ cung cấp bởi một thành phần luôn phải sẵn sàng phục vụ thông qua giao diện và mọi tương tác với thành phần đó đều thông qua giao diện. Các giao diện của thành phần chỉ được thế hiện công khai dưới dạng các thao tác được nhận vào tham số, còn trạng thái bên trong của từng giao diện được che giấu hoàn toàn với bên ngoài.
+\end{enumerate}
+
+Từ cách tiếp cận trên, thì các thành phần phần mềm sẽ có hai loại giao diện. Thứ nhất, các giao diện mà thông qua đó các dịch vụ của các thành phần được cung cấp và được sử dụng, gọi là giao diện cung cấp. Thứ hai, là các giao diện cho các dịch vụ mà các thành phần cần sử dụng tới để hoạt động một cách đúng đắn, gọi là giao diện yêu cầu.
+
+\begin{itemize}
+  \item Giao diện cung cấp - định nghĩa các dịch vụ sẽ được cung cấp bởi một thành phần, giao diện này hay còn được gọi là giao diện lập trình ứng dụng của thành phần hay API(*) của thành phần. Giao diện định nghĩa các phương thức sẽ được dùng cho việc sử dụng các dịch vụ của thành phần.
+  \item Giao diện cung cấp - định nghĩa các dịch vụ cần phải cung cấp để một thành phần trong một hệ thống hoạt động một cách đúng đắn. Nếu các dịch vụ này không sẵn sàng để cung cấp thì thành phần yêu cầu chúng sẽ không hoạt động. Điều này không làm giảm đi tính độc lập cũng như khả năng triển khai của một thành phần phần mềm, bởi vì các giao diện yêu cầu này không định nghĩa cách các dịch vụ được cung cấp như thế nào mà chỉ định rõ các dịch vụ nào cần phải được cung cấp.
+\end{itemize}
+Hình \ref{fig:component_a} là mô hình UML của một thành phần phần mềm và hai loại giao diện của một thành phần.
+	\begin{figure}[bp]
+		\centering
+			\includegraphics{image/component_a.JPG}
+		\caption{Hai loại giao diện của một thành phần}
+		\label{fig:component_a}
+	\end{figure}
+	
+Các giao diện yêu cầu của một thành phần có thể được nối với giao diện cung cấp của một thành phần trong mô hình UML để thể hiện việc sử dụng dịch vụ giữa thành phần. Ví dụ, với một hệ thống xử lí dữ liệu gồm thành phần, một thành phần có nhiệm vụ thu thập dữ liệu, một thành phần có nhiệm vụ xử lý dữ liệu vào đưa ra báo cáo. Thành phần đưa ra báo cáo sẽ lấy dữ liệu từ thành phần cung cấp dữ liệu. Hình \ref{fig:data_process} mô tả việc cung cấp dịch vụ từ một thành phần cho thành phần khác có thể hoạt động.
+
+\begin{figure}
+	\centering
+		\includegraphics{image/data_process.JPG}
+	\caption{Sử dụng dịch vụ giữa hai thành phần}
+	\label{fig:data_process}
+\end{figure}
+
+
+\subsection{Các mô hình thành phần}
+Một mô hình phần mềm là định nghĩa của các tiêu chuẩn dùng cho việc cài đặt các thành phần phần mềm, làm tài liệu cũng như triển khai. Các tiêu chuẩn này dành cho các lập trình viên, người phát triển để đảm bảo các thành phần có thể tương tác, làm việc được với nhau. Bên cạnh đó, các mô hình phần mềm còn cung cấp các nền tảng phần mềm hỗ trợ cho việc thực thi, vận hành các thành phần phần mềm. Có rất nhiều các mô hình thành phần đã được đề xuất, nhưng có thể nói tới hai mô hình quan trọng và phổ biến là mô hình Webservice và mô hình Sun’s  Enterprise  Java  Beans  (EJB).
+
+Một mô hình phần mềm lý tưởng sẽ gồm các phần cơ bản như sau :
+
+\begin{enumerate}
+  \item Giao diện - Các thành phần được định nghĩa bởi việc xác dịnh các giao diện của chúng. Một mô hình phần mềm quy định cách các giao diện được định nghĩa và các phần tử khác như tên thao tác, các tham số, các ngoại lệ. Các mô hình thành phần cũng cần xác định ngôn ngữ dùng để định nghĩa các giao diện. Ví dụ với mô hình Webservice thì ngôn ngữ dùng để định nghĩa giao diện là WSDL (Web Services Description Language), còn với mô hình Sun’s  Enterprise  Java  Beans thì ngôn ngữ dùng để định nghĩa các giao diện là các interfaces của ngôn ngữ lập trình Java.
+	\item Cách sử dụng - Để các thành phần có thể sử dụng được chúng cần có một định danh duy nhất, ví dụ các dịch vụ web cần có một định danh tài nguyên chuẩn URI (Uniform Resource Identifier) duy nhất để có thể xác định và sử dụng. Bên cạnh đó mỗi thành phần cần có siêu dữ liệu (meta-data) chứa thông tin về chính thành phần đó, ví dụ thông tin về các giao diện và các thuộc tính. Hệ thống siêu dữ liệu là rất quan trọng để để người dùng có thể biết được giao diện nào được cung cấp hay yêu cầu bởi một thành phần phần mềm.
+	\item Cách triển khai - Một mô hình thành phần cần cung cấp một đặc tả về cách các thành phần được đóng gói cho việc triển khai một cách độc lập. Ngoài ra các một mô hình phần mềm phần mềm cũng có các quy tắc quy định khi nào việc thay thế một thành phần được phép thực hiện. 
+	
+\end{enumerate}
+
+
