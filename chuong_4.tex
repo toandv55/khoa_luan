@@ -1,7 +1,60 @@
 \chapter{Ứng dụng thực tế}
- mô tả yêu cầu (đủ hiểu chức năng chứ không cần mức đặc tả). Nói rằng chi tiết đặc tả nằm trong bộ test/spec của Thoại.
-bundle architecture
-design spec
-build and deployment mô tả việc sử dụng maven (script for auto build-deploy???real-world deployment and demo)
-assessments (in this particular application) advantages over pure Java , drawbacks
-Nhớ lập luận và mô tả theo ngôn ngữ COmponent, láy lại các nội dung quan trọng trong chương 1-2
+ 
+\section{Giới thiệu về hệ thống}
+Hệ thống thực tế xây dụng nhằm hỗ trợ các học viên cao học tại khoa Công nghệ thông tin, Đại học Công nghê, Đại học Quốc gia Hà Nội đơn giản hóa việc đăng kí đề tài luận văn cũng như các thủ tục liên quan.
+
+Hệ thống sẽ phục vụ bốn người dùng chính là : học viên cao học, giảng viên của khoa, cán bộ của bộ môn ở khoa công nghệ thông tin, cán bộ của khoa công nghệ thông tin, với mỗi đối tượng người dùng sẽ được cấp một loại tài khoản tương ứng.
+Quy trình đăng kí đề tài khóa luận sẽ được thực hiện như sau : 
+
+\begin{enumerate}
+\item Học viên cao học đăng nhập vào hệ thống nhập thông tin về tên đề tài, đăng kí giảng viên hướng dẫn, tải lên một file đề cương mô tả sơ lược về đề tài mình sẽ thực hiện. Tên đề tài sẽ do học viên và giảng viên thống nhất từ trước, trong thời hạn đăng kí thì học viên có thể cập nhật, thay đổi thông tin đề tài. Trạng thái đề tài của học viên lúc này chuyển từ \textit{Chưa bắt đầu} sang \textit{Chuẩn bị đề tài}.
+\item Sau khi học viên đăng kí trên hệ thống và nộp các giấy tờ đăng kí hợp lệ cho khoa, cán bộ của khoa đăng nhập hệ thống nhận đăng kí đề tài, khi đề tài đã được nhận thì học viên không thể thay đổi thông tin, trạng thái đề tài lúc này chuyển sang thành \textit{Đợi duyệt đề cương}
+\item Đề cương của học viên sẽ được các cán bộ của bộ môn tương ứng với ngành mà học viên đó đang theo học xem xét và duyệt, sau đó cán bộ của bộ môn có thể đăng nhập hệ thống để đưa nhận xét cho mỗi đề tài, nhận xét này sẽ được hiển thị cho học viên, và cán bộ của khoa thấy.
+\item Sau khi các đề cương được duyệt và thì cán bộ của khoa sẽ đăng nhập hệ thống để xác nhận các đề cương đã được duyệt là hợp lệ và được phép thực hiện thì trạng thái của đề tài chuyển sang là \textit{Đang thực hiện}s.
+\item Trong quá trình thực hiện đề tài luận văn, các học viên sẽ phải tham gia một đợt seminar để trình bày về các nội dung đã thực hiện được trong luận văn.
+\item Cán bộ của khoa sẽ mở ra đợt seminar cho học viên đăng kí, seminar sẽ có ngày dự kiến, ngày bắt đầu được đăng kí và ngày hết hạn.
+\item Các học viên đăng kí trình bày ở seminar.
+\item Một đợt seminar sẽ có nhiều các tiểu ban làm nhiệm vu tổ chức, mỗi bộ môn sẽ có một tiểu ban, cán bộ của khoa sẽ mở các tiểu ban này, gồm có một chủ tich, một phó chủ tịnh, một thư kí, địa điểm, và thời gian tổ chức.
+\item Cán bộ của khoa sẽ xếp các học viên đã đăng kí trình bày seminar vào các tiểu ban.
+\item Sau khi trình bày xong seminar, cán bộ của khoa sẽ phân cán bộ phản biện cho từng đề tài.
+\item Cán bộ của khoa chuyển trạng thái của các đề tài được phép bảo vệ sang \textit{Chuẩn bị bảo vệ}
+\item Sau khi học viên đã bảo vệ đề tài thì cán bộ của khoa sẽ chuyển trạng thái đề tài luận văn thành \textit{
+Đã bảo vệ}
+\end{enumerate}
+
+\section{Kiến trúc hệ thống}
+Hệ thống thực nghiệm này sẽ được xây dựng sử dụng công nghệ OSGi theo mô hình phát triển hướng thành phần. Hệ thống sẽ được xây dựng sử dụng bản cài đặt của Core OSGi là Apache Felix \cite{felix} và một số thành phần khác của bản đặc tả Enterprise OSGi cung cấp bởi bản cài đặt của Apache Aries \cite{aries}. \\
+
+Hệ thống sẽ gồm các OSGi bundles hay các thành phần phần mềm độc lập như trong hình \ref{fig:app}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/app.JPG}
+	\caption{Các thành phần của hệ thống}
+	\label{fig:app}
+\end{figure}
+
+Các thành phần sẽ các cung cấp các dịch vụ khác nhau và độc lập với nhau, chỉ giao tiếp thông qua giao diện dịch vụ
+\begin{itemize}
+\item Persistence Servcies - Là thành phần cung cấp các dịch vụ liên quan tới xử lý cơ sở dữ liệu, thành phần này sử dụng thành một thành phần của phiên bản đặc tả Enterprise OSGi là JPA \cite{osgiee5} (Java Persistence Interfaces) với bản cài đặt là Apche OpenJPA \cite{openjpa} giành cho OSGi.
+\item User Services - Cung cấp các dịch vụ liên quan tới quản lý, xác thực người dùng, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item Postgraduate Services - Cung cấp các dịch vụ xử lý đến thông tin liên quan tới học viên trong hệ thống, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item Lecturer Services - Cung cấp các dịnh vụ liên quan tới xử lý thông tin của giảng viên, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item Seminar Services - Cung cấp các dịch vụ liên quan tới xử lý thông tin Seminar, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item Thesis Servcies - Cung cấp các dịch vụ liên quan tới xử lý các đề tài khóa luận, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item Department Services - Cung cấp các dịch vụ liên quan tới bộ môn, sử dụng dịch vụ của thành phần Persistence Servcies.
+\item WEB UI - Thành phần đóng vai trò giao tiếp với người dùng, cung cấp giao diện web, sử dụng dịch vụ từ các thành phần cung cấp dịch vụ khác, từ thành phần Persistence Servcies.
+\end{itemize}
+
+Kiến trúc này là khá linh hoạt bởi vì các thành phần có thể được tháo rời và lắp ghép lại một cách dễ dàng, việc thiếu đi một số thành phần, chỉ làm hệ thống thiếu đi một số chức năng mà không bị phá vỡ hoàn toàn.
+
+\section{Phát triển và kiểm thử}
+Các thành phần phần mềm của hệ thống sẽ được xây dựng và hoàn thiện từng phần, mỗi thành phần hoàn thiện và sẵn sàng cung cấp dịch vụ thì khi được triển khai và kết nối hệ thống, thực chất là chỉ kết nối động qua việc sử dụng các dịch vụ thông qua các giao diện dịch vụ được công khai, thì hệ thống sẽ có thêm một số chức năng mới. \\
+
+Mỗi thành phần phần mềm của hệ thống thực nghiệm sẽ là một project riêng biệt được tổ chức theo cấu trúc của Apache Maven \cite{maven}. Các thành phần này sẽ được biên dịch và đóng gói, tạo file siêu dữ liệu một cách tự động dựa vào sự hỗ trợ của Apache Maven.  
+
+Hệ thống hỗ trợ học viên cao học này sẽ được kiểm thử các chức năng một cách tự động được thực hiện trong đề tài \textit{Kiểm thử tự động cho các các hệ thống hướng thành phần} do bạn Nguyễn Ngọc Thoại thực hiện dưới sự hướng dẫn của TS. Trần Thị Minh Châu. 
+\section{Triển khai hệ thống}
+Các thành phần của hệ thống sẽ được triển khai trên một môi trường tích hợp là Apache Servicemix \cite{servicemix} tích hợp Apache Felix và các thành phần của Apache Aries và OpenJPA và Web server Jetty \cite{jetty} để xử lý tương tác trên nền web. Cơ sở dữ liệu của hệ thống sẽ được lưu trữ sử dụng hệ quản trị cơ sở dữ liệu quan hệ MySQL.\\
+
+Các thành phần của hệ thống cũng sẽ được triển khai một cách tự động vào môi trường thực thi một cách tự động sử dụng Apache Maven trên hai nền tảng là Window và Linux.
+

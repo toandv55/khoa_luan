@@ -30,19 +30,9 @@ Dưới đây là mô tả sơ lược cho các lớp trong hình \ref{fig:layer
 	\item  Execution Environment - Cung cấp môi trường thực thi cho các thành phần có thể hoạt động.
 \end{itemize}
 
-\section{OSGi hỗ trợ kĩ nghệ phần mềm hướng thành phần}
-Ở trong mục 2.1 của chương 2 các thành phần cơ bản của kĩ nghệ phần mềm hướng thành phần bao gồm :
-\begin{enumerate}
-	\item Các thành phần phần mềm
-	\item Các chuẩn thành phần
-	\item Các thành phần trung gian - Middleware
-	\item Một quy trình phát triển
-\end{enumerate}
-Từ đây ta sẽ chỉ ra cách mà công nghệ OSGi hỗ trợ kĩ nghệ phần mềm hướng thành phần.
-\subsection{Thành phần phần mềm của OSGi}
-Trong kĩ nghệ phần hướng thành phần thì các thành phần phần mềm (software components) là thành phần cơ bản và trọng tâm. Trong mục này cách các thành phần phần mềm được triển khai trong công nghệ OSGi sẽ được trình bày.
-Các thành phần phần mềm trong OSGi là các OSGi bundles, trước khi chứng minh các OSGi bundles có đầy đủ các đặc điểm cơ bản của các thành phần phần mềm, ta sẽ tìm hiểu về các đặc điểm cơ bản cũng như cấu trúc của các OSGi bundles.
-\subsection{Các OSGi bundles \cite{osgicore5}}
+\section{Các OSGi bundles}
+Trước khi chứng minh rằng OSGi hỗ trợ tốt cho hướng phát triển triển phần mềm hướng thành phần, các đặc điểm của OSGi bundles - các thành phần phần mềm của OSGi sẽ được trình bày dưới đây. \\
+
 OSGi là một công nghệ dành cho việc phát triển các hệ thống phần mềm hướng thành phần cho nền tảng Java vì thế các OSGi bundles chính là các file JAR \cite{jar}. Về cơ bản, các OSGi bundles có các thành phần không khác thì các file JAR thông thường bao gồm : các files .class (Java byte code), các file tài nguyên như .xml, .jpg và một file chứa siêu dữ liệu (thông tin về chính file JAR) Manifest.mf. Hình \ref{fig:bundle} là cấu trúc của một OSGi bundle.
 \begin{figure}[htbp]
 	\centering
@@ -66,10 +56,6 @@ inputencoding=utf8,
 breaklines=true,
 basicstyle=\ttfamily\footnotesize,
 caption=Nội dung của môt file manifest của OSGi bundle]
-
-Manifest-Version: 1.0
-Build-Jdk: 1.7.0_51
-Built-By: dotoan
 Bundle-ManifestVersion: 2
 Bundle-Name: postgraduate
 Bundle-SymbolicName: postgraduatems-postgraduate
@@ -79,7 +65,6 @@ Export-Service: postgraduatems.postgraduate.services.EditPostgraduateBO, postgra
 Import-Service: postgraduatems.persistence.services.LecturerDAO;multiple:false, postgraduatems.persistence.services.PostgraduateDAO;multiple:=false
 Import-Package: postgraduatems.persistence.entities;version="[1.0,2)", postgraduatems.persistence.services;version="[1.0,2)", postgraduatems.postgraduate.services;version="[1.0,2)"
 \end{lstlisting}
-
 
 Bundle trên có tên là "postgraduatems-postgraduate", số phiên bản là 1.0.0, bundle 
 này cung cấp ba dịch vụ thông qua ba Java interfaces là \seqsplit{postgraduate.services.EditPostgraduateBO}, 
@@ -93,14 +78,17 @@ Bundle này chỉ sử dụng ba Java package từ bundle bên ngoài là postgr
 \subsubsection{Các file JAR thông thường không thể được dùng như các thành phần}
 Các file JAR là một cách đóng gói, lưu trữ các file .class và các tài nguyên khác \cite{jar} với mục đích để sử dụng trong các ứng dụng viết bằng Java thông thường được dùng như các thư viện hỗ trợ. Tuy nhiên cách đóng gói các files .class thành một file JAR chỉ mang ý nghĩa về mặt vật lý, tức là chỉ giúp phân tách, tổ chức các files .class vào các đơn vị lưu trữ khác nhau giúp cho việc quản lý và sử dụng dễ dàng hơn. Tuy nhiên các file JAR này không hề có cơ chế để kiếm soát việc sử dụng các Java class bên trong chúng. Một khi một file JAR được đưa vào trong classpath (chứa đường dẫn tới các thư viện) của một file JAR khác thì tất cả các Java class của file JAR được đưa vào sẽ luôn được nhìn thấy và sử dụng bởi trong file JAR chứa đường dẫn tới file JAR mà các Java class này nằm trong. Bản thân ngôn ngữ lập trình Java chỉ có cơ chế kiểm soát việc sử dụng các Java class ở một mức thấp hơn đó là package, trong khi một file JAR chứa rất nhiều packages cho nên việc áp dụng cơ chế kiểm soát các Java class ở mức package không mang lại hiệu quả để các file JAR thông thường trở thành các thành phần, và khi được tải vào máy ảo Java thì ranh giới của các file JAR biến mất, và lúc này không thể biết được Java class nào thuộc về file JAR nào. Trong khi việc kiểm soát, che giấu cài đặt bên trong là đặc điểm cơ bản của một thành phần phần mềm tái sử dụng, cho nên một file JAR thông thường không thể được sử dụng như một thành phần mềm, và càng không thể dùng để xây dựng các hệ thống hướng thành phần thực sự.
 
-\subsection{Các dịch vụ của OSGi bundle}
-Mỗi bundle trong OSGi sẽ cung cấp một số các dịch vụ, đồng thời mỗi bundle cũng có thể sử dụng dịch vụ từ các bundle khác. Nói một cách khác, các OSGi bundle giao tiếp và làm việc với nhau thông qua các dịch vụ. Mỗi dịch vụ trong OSGi bundle gồm hai thành phần :
+\section{Các dịch vụ của OSGi bundles}
+
+Mỗi bundle trong OSGi sẽ cung cấp một số các dịch vụ, đồng thời mỗi bundle cũng có thể sử dụng dịch vụ từ các bundle khác. Nói một cách khác, các OSGi bundle giao tiếp và làm việc với nhau thông qua các dịch vụ. Mỗi dịch vụ trong 
+\subsection{Các thành phần cở bản của một dịch vụ}
+OSGi bundle gồm hai thành phần 
 \begin{enumerate}
 \item Giao diện dịch vụ (service interfaces) - được dùng để đăng kí dịch vụ cũng như dùng để tìm kiếm và sử dụng dịch vụ, các giao diện dịch vụ chính là các Java interfaces, giống như những bản hợp đồng, thỏa thuận giữa hai bên, bên cung cấp và sử dụng dịch vụ. Bên cung cấp sẽ cung cấp dịch vụ thông qua các giao diện này, và bên sử dụng chỉ cần biết các giao diện này để có thể sử dụng được dịch vụ mà không cần biết dịch vụ được cài đặt như thế nào.
 \item Cài đặt của dịch vụ (service implementation) - Cài đặt của dịch vụ thực chất là các Java class triển khai các Java interfaces mà dịch vụ sẽ được cung cấp thông qua. Tạo một dịch vụ chính là việc tạo một đối tượng của Java class mà chứa cài đặt của dịch vụ và đăng kí đối tượng này là một dịch vụ thông qua một Java interface. Việc sử dụng dịch vụ trình là việc sử dụng các phương thức có trong đối tượng được đăng kí, các phương thức này phải được quy định trong Java interface.
 \end{enumerate} 
 
-Trong OSGi thì lớp Service sẽ chịu trách nhiệm cho việc đăng kí các dịch vụ thông qua các giao diện dịch vụ của các bundle cũng như việc tìm kiếm các dịch vụ hay các đối tượng Java và kết nối dịch vụ với bundle yêu cầu dịch vụ để được sử dụng.
+Trong OSGi thì lớp Service của mô hình nhiều lớp của OSGi (Hình \ref{fig:layers}) sẽ chịu trách nhiệm cho việc đăng kí các dịch vụ thông qua các giao diện dịch vụ của các bundle cũng như việc tìm kiếm các dịch vụ hay các đối tượng Java và kết nối dịch vụ với bundle yêu cầu dịch vụ để được sử dụng.
 Hình \ref{fig:service_reg} mô tả quá trình đăng kí và sử dụng dịch vụ của OSGi bundles.
 \begin{figure}[htbp]
 	\centering
@@ -118,7 +106,138 @@ Quá trình đăng kí diễn ra như sau
 \item Bundle sử dụng dịch vụ của bundle cung cấp, tuy nhiên bundle sử dụng không biết dịch vụ thực sự chạy ở đâu mà sự liên kết này là hoàn toàn động.
 \end{enumerate} 
 
-\subsection{Triển khai các OSGi bundle}
+\subsection{Cách đăng kí và sử dụng dịch vụ}
+Với hai phiên bản đặc tả của OSGi, Core OSGi và Enterprise OSGi, cung cấp hai cách để đăng kí cũng như tìm kiếm và sử dụng dịch vụ.
+\subsection{Quản lý dịch vụ bằng mã nguồn Java}
+Đây là cách làm trong phiên bản đặc tả Core OSGi \cite{osgicore5}. Với phiên bản đặc tả này mã nguồn trong bundle có thể được thực thi thì mỗi bundle cần có một Java class đóng vai trò là điểm khỏi động của bundle, Java class này sẽ phải cài đặc một Java interface tiêu chuẩn do OSGi định nghĩa là org.osgi.framework.BundleActivator với hai phương thức là \textit{start} và \textit{stop}, sẽ được gọi lần lượt khi bundle được khỏi động và dừng hoạt động.
+Đồng thời để OSGi nhận ra Java class sẽ đóng vai trò là điểm khởi động thì một class duy nhất phải được khai khai báo trong trường thông tin là \textit{Bunlde-Activator} trong file siêu dữ liệu Manifest.mf của bundle.
+Dưới đây là ví dụ việc đăng kí một dịch vụ sử dụng mã nguồn Java trong một bundle cung cấp dịch vụ, đoạn mã \ref{regservice}
+
+\begin{lstlisting}[label=regservice, 
+inputencoding=utf8,
+breaklines=true,
+language=Java,
+basicstyle=\ttfamily\footnotesize,
+caption=Đăng kí một dịch vụ dùng mã Java]
+
+package a.api;
+public interface HelloService {
+    public void hello();
+}
+
+public class HelloImpl implements HelloService {
+    public void hello() {
+        System.out.println("Welcome to the OSGi world");
+    }
+}
+
+import org.osgi.framework.BundleActivator ;
+import org.osgi.framework.BundleContext ;
+import org.osgi.framework.ServiceRegistration
+public class HelloActivator implements BundleActivator {
+    ServiceRegistration registration;
+    public void start(BundleContext context) {
+        HelloService helloService = new HelloImpl();
+        registration = context.registerService(HelloService.class.getName(), helloService, null);
+    }
+		
+    public void stop(BundleContext context) throws Exception {
+        registration.unregister() ;
+   }
+}
+\end{lstlisting}
+
+Ở trên đoạn mã \ref{regservice} Java interface \textit{HelloService} dùng để đăng kí dịch vụ với một phương thức là \textit{hello}. Java class \text{HelloServiceImpl} là cài đặt của \textit{HelloService}. Ở trong Java class \textit{HelloActivator}, trong phương thức \textit{start} một đối tượng của Java class \textit{HelloServiceImpl} được tạo và đăng kí sử dụng Java interface \textit{HelloService} sử dụng một đối tượng của Java class  \textit{ServiceRegistration} với phương thức \textit{registerService} của Java class \textit{BundleContext}, một đối tượng của \textit{BundleContext} sẽ được tạo để biểu diễn ngữ cảnh thực thi của bundle trong môi trường mà bundle được triển khai, sau đó đối tượng này sẽ được truyền tới cho các phương thức \textit{start} và \textit{stop}. Phương thức \textit{registerService} sẽ nhận ba tham số đầu vào là tên của Java interface sẽ đăng kí dịch vụ, và đối tượng cài đặt của dịch vụ thật, và tham số thứ ba là một đối tượng kiểu từ điển của Java để chứa các thuộc tính bổ sung cho dịch vụ đăng kí, ở đây tham số thứ ba truyền vào có giá trị là \textit{null}.
+Trong phương thức \textit{stop} thì đối tượng dùng cho đăng kí dịch vụ \textit{registration} sẽ hủy đăng kí khi bundle được dừng lại. \\
+
+Đoạn mã \ref{useservice} dưới đây là cách tìm kiếm và sử dụng dịch vụ trong bundle sử dụng dịch vụ.
+
+\begin{lstlisting}[label=useservice, 
+inputencoding=utf8,
+breaklines=true,
+language=Java,
+basicstyle=\ttfamily\footnotesize,
+caption=Sử dụng một dịch vụ dùng mã Java]
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import a.api.HelloService;
+public class HelloActivator implements BundleActivator {
+    ServiceReference reference;
+    public void start(BundleContext context) {
+        reference = context.getServiceReference(HelloService.class.getName()) ;
+        HelloService helloService = context.getService(reference);
+		    helloService.hello();
+    }
+    public void stop(BundleContext context) throws Exception {
+        context.ungetService(reference);
+    }
+}
+\end{lstlisting}
+Ở đoạn mã \ref{useservice}, Java interface \textit{HelloService} sẽ được dùng để tìm kiếm dịch vụ mà nó được đăng kí thông qua, để tìm kiếm dịch vụ, một đối tượng của Java class \textit{ServiceReference} được sử dụng, sau khi dịch vụ được tìm thấy và trả về, thì dịch vụ sẽ được sử dụng như những đối tượng Java thông thường. Khi bundle được dừng lại, dịch vụ sẽ được giải phóng.\\
+
+Ưa điểm của cách làm này là khá đơn giản, chỉ phải sử dụng tới mã nguồn Java, tuy nhiên khi số lượng dịch vụ tăng lên nhiều thì số dòng mã sẽ tăng nhiều và việc quản lý sẽ khó hơn. Bên cạnh đó việc tạo các đối tượng dịch vụ và sử dụng các dịch vụ nằm ngay bên trong mã nguồn khiến cho bundle kém linh động hơn bởi vì việc này được thực hiện ngay trong thời gian biên dịch, và dịch vụ cung cấp chỉ có duy nhất một cài đặt cố định, nếu muốn thay đổi cài đặt của dịch vụ bằng một cài đặt khác thì mã nguồn sẽ phải sửa đổi.
+
+\subsection{Quản lý dịch vụ bằng Blueprint Container}
+Để loại bỏ sự hạn chế của các đăng kí và sử dụng dịch vụ bằng mã nguồn Java, trong bản đặc tả Enterprise OSGi 5, một thành phần gọi là  \textit{Blueprint Container} đã được đưa ra để giúp việc đăng kí cũng như sử dụng các dịch vụ trong OSGi bundles trở lên thuận tiện và linh hoạt hơn, Blueprint Container áp dụng kĩ thuật thiết kế phổ biến trong thiết kế phần mềm đó là \textit{Inversion of Control} \cite{ioc}, hay cụ thể hơn là \textit{Dependency Injection} \cite{di}.\\
+
+Thay vì sử dung mã nguồn Java để đăng kí và sử dụng dịch vụ thì Blueprint dùng các thẻ xml để thực hiện.Đoạn mã \ref{refxml} thể hiện việc đăng kí một dịch vụ dùng các thẻ xml, bundle cung cấp dịch vụ không cần tới Java class cài đặt Java interface là {BundleActivator}.s
+\begin{lstlisting}[label=refxml, 
+inputencoding=utf8,
+breaklines=true,
+language=xml,
+basicstyle=\ttfamily\footnotesize,
+caption=Đăng kí dịch vụ dùng Blueprint]
+<blueprint>
+
+<bean id = "hello" class ="a.impl.HelloImpl" />
+
+<service ref ="hello" interface ="a.api.HelloService "/>
+
+</blueprint>
+\end{lstlisting}
+ 
+Ở đoạn mã xml \ref{refxml} thẻ \textit{<bean>} dùng để tạo một đối tượng cài đặt của dịch vụ \textit{HelloService}, đối tượng này sẽ được gán cho một dịch danh sử dụng thuộc tính \textit{id}. Thẻ \textit{<service>} dùng để đăng kí một đối tượng Java như một dịch vụ thông qua một Java interface. File xml chứa đoạn mã này sẽ được chứa trong bundle cung cấp dịch vụ và sẽ được đọc và xử lý bởi Blueprint khi bundle được khởi động\\
+
+Để sử dụng dịch vụ thì bundle sử dụng cũng cần có một file xml có nội dung như trong đoạn mã \ref{usexml}
+Ở trong bundle sử dụng thay vì phải có một Java class cài đặt Java interface là {BundleActivator} thì chỉ cần có một Java class thông thường, đoạn mã \ref{pojo}
+\begin{lstlisting}[label=pojo, 
+inputencoding=utf8,
+breaklines=true,
+language=Java,
+basicstyle=\ttfamily\footnotesize,
+caption=Java class sử dụng dịch vụ]
+package b;
+import a.api.HelloService;
+public class HelloClient {
+    HelloService helloService;
+    public void start() {
+        helloService.hello();
+    }
+}
+\end{lstlisting}
+Đoạn mã Java \ref{pojo} chỉ chứa một thuộc tính thuộc kiểu của Java interface mà dịch vụ sẽ được đăng kí thông qua và một phương thức sử dụng dịch vụ đó mà không hề có việc tìm kiếm hay kết nối dịch vụ ở đây, việc đó sẽ được tách biệt ra bên ngoài và do Blueprint đảm nhiệm, cài đặt thực sự của dịch vụ sẽ được gắn vào trong thời gian chạy thực sự của bundle.
+\begin{lstlisting}[label=usexml, 
+inputencoding=utf8,
+breaklines=true,
+language=xml,
+basicstyle=\ttfamily\footnotesize,
+caption=Sử dung dịch vụ dùng Blueprint]
+<blueprint>
+
+<reference id = "hello" interface ="a.api.HelloService " />
+
+<bean class = "b.HelloClient" init-method="start">
+    <property name = "helloService" ref = "hello" />
+</bean>
+
+</blueprint >
+\end{lstlisting}
+ 
+Đoạn mã xml \ref{usexml}, thẻ \textit{<reference>} dùng để tham chiếu tới dịch vụ đã được đăng kí bởi bundle cung cấp dịch vụ sử dụng Java interface là \textit{HelloService}. Một đối tượng của Java class sử dụng dịch vụ cũng sẽ được tạo bằng cách dùng thẻ \textit{<bean>} và thẻ \textit{<property>} dùng để gắn dịch vụ giống như một thuộc tính cho đối tượng thuộc kiểu của Java class \textit{HelloClient}. Khi bundle được khởi động thì phương thức \textit{start} sẽ được gọi bởi vì khai báo trong thẻ \textit{<bean>} sử dựng thuộc tính là \textit{init-method}.\\
+
+Bởi vì tính linh động và thuận tiện trong việc đăng kí và sử dụng dịch vụ của OSGi bundles nên Blueprint là cách làm tối ưu nhất và sẽ được sử dụng trong hệ thống thực nghiệm hỗ trợ học viên cao học đăng kí đề tài luận văn của khóa luận này.
+\section{Triển khai các OSGi bundles}
 OSGi cung cấp một môi trường thực thi mà qua đó các OSGi bundle sẽ được triển khai và và được chạy. Hình \ref{fig:runtime} thể hiện một môi trường thực thi của các OSGi bundle.
 \begin{figure}[htbp]
 	\centering
@@ -126,7 +245,7 @@ OSGi cung cấp một môi trường thực thi mà qua đó các OSGi bundle s�
 	\caption{Môi trường thực thi của các OSGi bundle}
 	\label{fig:runtime}
 \end{figure}
-Bên cạnh đó việc triển khai và quản lý các bundle cũng được thực hiện một cách linh động và thuận tiện bởi lớp Life-Cycle của OSGi. Hình \ref{fig:states} mô tả các trạng thái của một OSGi bundle và các thao tác để chuyển trạng thái của bundle.
+Bên cạnh đó việc triển khai và quản lý các bundle cũng được thực hiện một cách linh động và thuận tiện bởi lớp Life-Cycle của OSGi, mỗi bundle khi được đưa vào trong môi trường sẽ có một số định danh duy nhất là \textit{bundle id} để thuận tiện cho việc quản lý. Hình \ref{fig:states} mô tả các trạng thái của một OSGi bundle và các thao tác để chuyển trạng thái của bundle.
 \begin{figure}[hbtp]
 	\centering
 		\includegraphics{image/states.JPG}
@@ -134,17 +253,83 @@ Bên cạnh đó việc triển khai và quản lý các bundle cũng được t
 	\label{fig:states}
 \end{figure}
 
-Các trạng thái của một 
+Các trạng thái của một OSGi bundle 
 
-\subsection{OSGi bundles là các thành phần phần mềm}
-Ở trên ta đã thấy tại sao một file JAR thông thường không thể 
+\begin{itemize}
+\item INSTALLED - Là trạng thái lúc của bundle khi được cài đặt vào trong môi trường thực thi của OSGi, sử dụng thao tác \textit{install <đường dẫn tới bundle>} do lớp Life-Cycle cung cấp.
+\item ACTIVE - Là trạng thái bundle đang chạy và các dịch vụ nó cung cấp sẵn sàng được sử dụng, để chuyển sang trạng thái ACTIVE từ trạng thái INSTALLED thì bundle cần chuyển qua hai trạng thái trung gian RESOLVED và STARTING, thao tác để chuyển trạng thái là \textit{start <bundle id>}.
+\item RESOVLED - Là trạng thái mà khi các java packages khai báo trong  trường \textit{Import-Package} được cung cấp đầy đủ, ở trạng thái này các dịch vụ của bundle cung cấp chưa sẵn sàng để phục vụ.
+\item STARTING - Là trạng thái trung gian trước khi bundle chuyển sang thái ACTIVE.
+\item STOPING - Là trạng thái trung gian trước khi bundle chuyển từ trạng thái ACTIVE về RESOLVED, dùng thao tác \textit{stop <bundle id>} để dừng bunlde.
+\item UNINSTALLED - Là trạng thái khi bundle bị gỡ bỏ ra khỏi môi trường thực thi, thao tác thực hiện \textit{uninstall <bundle id>}
+\end{itemize}
 
- How does OSGI support component-based... and modularity.
-advantages over pure Java
- Types(?) of OSGIs
-- Descriptive
-- Spring OSGI
-- Blueprint
-for each (description, sample code, pros and cons,)
+\section{OSGi hỗ trợ phát triển hướng thành phần}
+Trong phần này, khóa luận sẽ đi chứng tỏ rằng OSGi hỗ trợ đầy đủ cho việc phát triển phần mềm hướng thành phần.
+Ở trong mục 2.1 của chương 2 các thành phần cơ bản của kĩ nghệ phần mềm hướng thành phần bao gồm
+\begin{enumerate}
+	\item Các thành phần phần mềm
+	\item Các chuẩn thành phần
+	\item Các thành phần trung gian - Middleware
+	\item Một quy trình phát triển
+\end{enumerate}
+Sau đây ba thành phần cơ bản đầu của kĩ nghệ phần mềm hướng thành phần, liên quan trực tiếp tới vấn đề về kĩ thuật sẽ được trình bày, còn thành phần cuối là liên quan tới quy trình phát triển, sẽ do người phát triển lựa chọn, có thể là phát triển cho tái sử dụng hoặc phát triển dựa trên việc sử dụng, mục 2.3 chương 2.
+\subsection{OSGi bundles là các thành phần mềm}
+Các OSGi bundles có đầy đủ các tính chất để có thể được coi là các thành phần phần mềm tái sử dụng.
+Môt thành phần phần mềm sẽ có năm đặc điểm chính sau, được trình bày chi tiết trong mục 2.2.1 của chương 2.
+\begin{enumerate}
+	\item Được chuẩn hóa 
+	\item Tính độc lập
+	\item Tính tương tác
+	\item Có thể triển khai
+	\item Được làm tài liệu\\
+\end{enumerate}
 
-conclude (what's the best for now, why)
+Được chuẩn hóa, các OSGi bundles đều được chuẩn hóa và được quy định trong đặc tả của OSGi, \cite{osgicore5}. Tất cả các OSGi đều phải có tên định danh, và phiên bản đính kèm và một số thông tin bắt buộc khác ở trong file Manifest.mf của mỗi bundle, mỗi bundle bắt được phải có file một file Manifest.mf.
+
+Về tính độc lập, các OSGi bundles là các thành phần độc lập với nhau,  mỗi thành phần có thể được lắp ghép hoặc triển khai mà không nhất thiết phải phụ thuộc vào thành phần khác, và trong trường hợp cần sợ hỗ trợ thì đều được khai báo tường minh bên trong file Manifest.mf.
+
+Tính tương tác, các OSGi bundles đều có thể tương tác với nhau thông qua các giao diện dịch vụ và mỗi bundle cung cấp.
+
+Có thể triển khai, mỗi OSGi đều có thể được cài đặt vào bên trong mỗi trường thực thi và có thể hoạt động như một thành phần độc lập.
+
+Được làm tài liệu, mỗi OSGi bundle đều có các thông tin cần thiết liên quan tới tên, phiên bản, các thành phần cần dùng tới, các dịch vụ cung cấp bên trong file Manifest.mf, với mỗi bundle việc tạo thêm các tài liệu mô tả về bundle cũng có thể được tạo dễ dàng.\\
+
+Dưới góc nhìn mỗi thành phần phần mềm là một đơn vị cung cấp dịch vụ thì các OSGi bundles cũng hoàn toàn đáp ứng được.
+Thứ nhất, mỗi OSGi bundle là các thành phần độc lập có thể thực thi được và được định nghĩa bởi các giao diện dịch vụ mà mỗi bundle cung cấp ra bên ngoài, còn cài đặt bên trong mỗi bundle là được che giấu hoàn toàn, người dùng không cần biết về cài đặt mà chỉ cần biết các giao diện dịch vụ, với các OSGi bundle là các Java interafaces. Các dịch vụ của một OSGi bundle có thể được dùng ngay bên trong bundle hoặc dùng ở các bundles khác.
+
+Thứ hai, các dịch vụ của một OSGi bundle được cung cấp thông qua giao diện dịch vụ là các Java interfaces, và mọi tương tác từ việc tìm kiếm, sử dụng dịch vụ chỉ thông qua các Java interfaces này. Trạng thái bên trong của dịch vụ, là các đối tượng Java thì hoàn toàn được che giấu với bên ngoài.
+
+\subsection{Các chuẩn thành phần của OSGi}
+Các chuẩn thành phần hỗ trợ việc việc tích hợp các thành phần với nhau. Các chuẩn này được quy định trong một mô hình thành phần, các chuẩn định nghĩa cách các giao diện được xác định và cách các thành phần giao tiếp với nhau
+Một mô hình phần mềm thành phần được trình bày trong chương 2 là có các đặc điểm cơ bản là : Giao diện, cách sử dụng, cách triển khai.
+
+\begin{itemize}
+	\item Giao diện - Các OSGi bundles đều có các giao diện, là các Java interfaces, các interfaces này mô tả các dịch vụ sẽ được cung cấp bởi một bundle. Ngôn ngữ để định nghĩa các giao diện này trong OSGi là Java, tên các phương thức, các tham số, các ngoại lệ đều được mô tả.
+	\item Cách sử dụng - Mỗi bundle đều có một định danh duy nhất kết hợp từ tên và số phiên bản phục vụ cho việc sử dụng. Bên cạnh đó các thông tin các về các dịch vụ yêu cầu và dịch vụ cung cấp cũng được mô tả tường minh trong file siêu dữ liệu là Manifest.mf
+	\item Cách triển khai - OSGi cung cấp một môi trường thực thi và các thao tác quản hỗ trợ cho việc triển khai, thay thế các bundle.
+\end{itemize} 
+
+Như vậy OSGi đã cung cấp được mô hình thành phần cơ bản cho việc phát triển hướng thành phần.
+
+\subsection{Các thành phần trung gian hỗ trợ trong OSGi}
+Để hỗ trợ các OSGi bundles có thể hoạt động, tương tác với nhau OSGi cung cấp một số thành phần hỗ trợ như trong mô hình nhiều lớp ở hình \ref{fig:layers}.\\
+
+Đầu tiên, OSGi cung cấp một mô hình thực thi để cho các OSGi bundles có thể triển khai và thực thi trên đó, bên cạnh đó là các thành phần khác như liên quan với vấn đề bảo mật như lớp \textit{Sercurity}, hỗ trợ đăng kí và sử dụng các dịnh vụ với lớp \textit{Service}, quản lý vòng đời của các bundles với lớp \textit{Life-Cycle}, quản lý việc chia sẻ mã nguồn giữa các bundles sẽ do lớp \textit{Module} đảm nhiệm.
+
+Như vậy về mặt kĩ thuật thì OSGi hỗ trợ đầy đủ các yếu tố cơ bản cho một mô hình phát triển hướng thành phần.
+
+\subsection{Ứng dụng của OSGi}
+OSGi như đã được đề cập là một đặc tả cho việc xây dựng một hệ thống hướng thành phần cho nền tảng của Java vì thế sẽ có thể nhiều cài đặt cho OSGi. Trên thực tế OSGi có một số cài đặt cho OSGi và ứng dụng của chúng.
+
+\begin{itemize}
+	\item Eclipse Equinox \cite{equinox} - Là một cài đặt của phiên bản Core OSGi và được sử dụng trong việc phát triển cho môi trường phát triển tích hợp rất phổ biến dành cho nền tảng Java là Eclipse.
+	\item Apache Felix \cite{felix} - Là mộ cài đặt khác của phiên bản Core OSGi và được sử dụng như môi trưởng thực thi trong Application Server cho Java EE là GlassFish \cite{glass}.
+	\item Apache Aries \cite{aries} - Là cài đặt đầu tiên cho phiên bản Enterprise OSGi, cài đặt này vẫn trong đang giai đoạn phát triển và mới chỉ hoàn thiện một số thành phần cơ bản của đặc tả Enterprise OSGi. Và trong hệ thống thực nghiệm của khóa luận này sẽ dùng các thành phần này kết hợp với phiên bản cài đặt của Core OSGi để phát triển.
+\end{itemize}
+
+
+
+
+
+
