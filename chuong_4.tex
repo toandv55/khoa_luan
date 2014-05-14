@@ -10,7 +10,7 @@ Quy trình đăng kí đề tài khóa luận sẽ được thực hiện như s
 \item Học viên cao học đăng nhập vào hệ thống nhập thông tin về tên đề tài, đăng kí giảng viên hướng dẫn, tải lên một file đề cương mô tả sơ lược về đề tài mình sẽ thực hiện. Tên đề tài sẽ do học viên và giảng viên thống nhất từ trước, trong thời hạn đăng kí thì học viên có thể cập nhật, thay đổi thông tin đề tài. Trạng thái đề tài của học viên lúc này chuyển từ \textit{Chưa bắt đầu} sang \textit{Chuẩn bị đề tài}.
 \item Sau khi học viên đăng kí trên hệ thống và nộp các giấy tờ đăng kí hợp lệ cho khoa, cán bộ của khoa đăng nhập hệ thống nhận đăng kí đề tài, khi đề tài đã được nhận thì học viên không thể thay đổi thông tin, trạng thái đề tài lúc này chuyển sang thành \textit{Đợi duyệt đề cương}
 \item Đề cương của học viên sẽ được các cán bộ của bộ môn tương ứng với ngành mà học viên đó đang theo học xem xét và duyệt, sau đó cán bộ của bộ môn có thể đăng nhập hệ thống để đưa nhận xét cho mỗi đề tài, nhận xét này sẽ được hiển thị cho học viên, và cán bộ của khoa thấy.
-\item Sau khi các đề cương được duyệt và thì cán bộ của khoa sẽ đăng nhập hệ thống để xác nhận các đề cương đã được duyệt là hợp lệ và được phép thực hiện thì trạng thái của đề tài chuyển sang là \textit{Đang thực hiện}s.
+\item Sau khi các đề cương được duyệt và thì cán bộ của khoa sẽ đăng nhập hệ thống để xác nhận các đề cương đã được duyệt là hợp lệ và được phép thực hiện thì trạng thái của đề tài chuyển sang là \textit{Đang thực hiện}.
 \item Trong quá trình thực hiện đề tài luận văn, các học viên sẽ phải tham gia một đợt seminar để trình bày về các nội dung đã thực hiện được trong luận văn.
 \item Cán bộ của khoa sẽ mở ra đợt seminar cho học viên đăng kí, seminar sẽ có ngày dự kiến, ngày bắt đầu được đăng kí và ngày hết hạn.
 \item Các học viên đăng kí trình bày ở seminar.
@@ -21,6 +21,43 @@ Quy trình đăng kí đề tài khóa luận sẽ được thực hiện như s
 \item Sau khi học viên đã bảo vệ đề tài thì cán bộ của khoa sẽ chuyển trạng thái đề tài luận văn thành \textit{
 Đã bảo vệ}
 \end{enumerate}
+Dưới đây là một số ca sử dụng chính của bốn đối tượng người dùng, hình \ref{fig:hv} - Các ca sử dụng chính của Học viên cao học, hình \ref{fig:cbkhoa} - Các ca sử dụng chính của Cán bộ khoa CNTT, hình \ref{fig:bm} - Các ca sử dụng chính của Cán bộ bộ môn, hình \ref{fig:gv} - Các ca sử dụng chính của giảng viên.
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/hv.JPG}
+	\caption{Các ca sử dụng chính của Học viên cao học}
+	\label{fig:hv}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/cbkhoa.JPG}
+	\caption{Các ca sử dụng chính của Cán bộ của khoa CNTT}
+	\label{fig:cbkhoa}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/bm.JPG}
+	\caption{Các ca sử dụng chính của Cán bộ của bộ môn}
+	\label{fig:bm}
+\end{figure}
+ 
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/gv.JPG}
+	\caption{Ca sử dụng chính của giảng viên}
+	\label{fig:gv}
+\end{figure}
+
+Sơ đồ chuyển trạng thái của đề tài luận văn được mô tả trong hình \ref{fig:dtstate}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/dtstate.JPG}
+	\caption{Sơ đồ chuyển trạng thái của Đề tài luận văn}
+	\label{fig:dtstate}
+\end{figure}
+
 
 \section{Kiến trúc hệ thống}
 Hệ thống thực nghiệm này sẽ được xây dựng sử dụng công nghệ OSGi theo mô hình phát triển hướng thành phần. Hệ thống sẽ được xây dựng sử dụng bản cài đặt của Core OSGi là Apache Felix \cite{felix} và một số thành phần khác của bản đặc tả Enterprise OSGi cung cấp bởi bản cài đặt của Apache Aries \cite{aries}. \\
@@ -32,6 +69,7 @@ Hệ thống sẽ gồm các OSGi bundles hay các thành phần phần mềm đ
 	\caption{Các thành phần của hệ thống}
 	\label{fig:app}
 \end{figure}
+
 
 Các thành phần sẽ các cung cấp các dịch vụ khác nhau và độc lập với nhau, chỉ giao tiếp thông qua giao diện dịch vụ
 \begin{itemize}
@@ -46,13 +84,78 @@ Các thành phần sẽ các cung cấp các dịch vụ khác nhau và độc l
 \end{itemize}
 
 Kiến trúc này là khá linh hoạt bởi vì các thành phần có thể được tháo rời và lắp ghép lại một cách dễ dàng, việc thiếu đi một số thành phần, chỉ làm hệ thống thiếu đi một số chức năng mà không bị phá vỡ hoàn toàn.
+\section{Thiết kế chi tiết}
+\subsection{Thiết kế cơ sở dữ liệu}
+Các đối tượng cần lưa trữ thông tin bền vững trong cơ sở dữ liệu được thể hiện ở mô hình thực thể quan hệ hình \ref{fig:erd}.
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/erd.JPG}
+	\caption{Mô hình thực thể quan hệ}
+	\label{fig:erd}
+\end{figure}
+Ý nghĩa mà quan hệ giữa các thực thể lưu trữ bền vững như sau.
+\begin{itemize}
+\item Postgraduate - Chứa thông tin của học viên cao học, một học viên cao học sẽ thực hiện 1 đề tài, và được một giảng viên hướng dẫn, một học viên sẽ tham gia trình bày 1 seminar và sẽ được phân vào trong một tiểu ban seminar, mỗi học viên sẽ thuộc về một ngành.
+\item Lecturer - Chứa thông tin về giảng viên, mỗi giảng viên có thể hướng dẫn nhiều học viên, giảng viên có thể thuộc về 1 tiểu ban seminar, mỗi giảng viên sẽ thuộc về một bộ môn.
+\item Thesis - Chứa thông tin về đề tài luận văn của học viên, 1 đề tài bắt buộc phải thuộc về 1 học viên.
+\item  DepartmentStaff - Chứa thông tin về cán bộ của bộ môn, mỗi cán bộ sẽ thuộc về một bộ môn.
+\item Major - Chứa thông tin về 1 ngành hay bộ môn, có 4 ngành/bộ môn trong khoa công nghệ thông tin : Công nghệ phần mềm, Khoa học máy tính, Mạng máy tính và truyền thông, Hệ thống thông tin.
+\item Seminar - Chứa thông tin về xê-mi-na, mỗi seminar sẽ có nhiều học viên tham gia, mỗi seminar sẽ có nhiều tiểu ban seminar.
+\item SemianarSubCommittee - Chứa thông tin về tiểu ban seminar, mỗi tiểu ban sẽ thuộc về 1 seminar, mỗi tiểu ban sẽ có giảng viên và học viên tham gia.
+\item User - Chứa thông tin về người dùng hệ thống, mỗi user sẽ thuộc về giảng viên, học viên, cán bộ bộ môn, cán bộ khoa tương ứng với từng vai trò của người dùng trong hệ thống.
+\end{itemize}
+Các bảng dữ liệu sinh ra từ sơ đồ thực thể quan hệ hình \ref{fig:erd} trong 3 hình \ref{fig:t1}, \ref{fig:t2}, \ref{fig:t3}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/t1.png}
+	\caption{Các bảng dữ liệu 1}
+	\label{fig:t1}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/t2.png}
+	\caption{Các bảng dữ liệu 2}
+	\label{fig:t2}
+\end{figure}
+
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/t3.png}
+	\caption{Các bảng dữ liệu 3}
+	\label{fig:t3}
+\end{figure}
+
+\subsection{Các giao diện dịch vụ của các thành phần}
+\subsubsection{Các giao diện dịch vụ của thành phần Persistence Services}
+Các giao diện cung cấp các dịch vụ của thành phần Persistence Services hình \ref{fig:persistence}
+\begin{figure}[htbp]
+	\centering
+		\includegraphics{image/persistence.JPG}
+	\caption{Các giao diện dịch vụ của thành phần Persistence Servcies}
+	\label{fig:persistence}
+\end{figure}
+
+Trong hình \ref{fig:persistence}, các giao diện dịch vụ là các Java interfaces, các interfaces này sẽ được cài đặt bên trong thành phần Persistence Services, và các dịch vụ xử lý cơ sở dữ liệu này sẽ được cung cấp qua các interfaces này.
+\begin{itemize}
+\item LecturerDAO - Chứa các phương thức cho việc xử lý các với thực thể Lecturer.
+\item DepartmentStaffDAO - Chứa các phương thức cho việc xử lý các với thực thể DepartmentStaff.
+\item ThesisDAO - Chứa các phương thức cho việc xử lý các với thực thể Thesis.
+\item PostgraduateDAO - Chứa các phương thức cho việc xử lý các với thực thể Postgraduate.
+\item SeminarDAO - Chứa các phương thức cho việc xử lý các với thực thể Seminar.
+\item UserDAO - Chứa các phương thức cho việc xử lý các với thực thể User.
+\item PostgraduateSeminarDAO - Chứa các phương thức cho việc xử lý các với thực thể PostgraduateSeminar.
+\item SeminarSubCommitteeDAO - Chứa các phương thức cho việc xử lý các với thực thể SeminarSubCommittee.
+\end{itemize} 
+
 
 \section{Phát triển và kiểm thử}
 Các thành phần phần mềm của hệ thống sẽ được xây dựng và hoàn thiện từng phần, mỗi thành phần hoàn thiện và sẵn sàng cung cấp dịch vụ thì khi được triển khai và kết nối hệ thống, thực chất là chỉ kết nối động qua việc sử dụng các dịch vụ thông qua các giao diện dịch vụ được công khai, thì hệ thống sẽ có thêm một số chức năng mới. \\
 
 Mỗi thành phần phần mềm của hệ thống thực nghiệm sẽ là một project riêng biệt được tổ chức theo cấu trúc của Apache Maven \cite{maven}. Các thành phần này sẽ được biên dịch và đóng gói, tạo file siêu dữ liệu một cách tự động dựa vào sự hỗ trợ của Apache Maven.  
 
-Hệ thống hỗ trợ học viên cao học này sẽ được kiểm thử các chức năng một cách tự động được thực hiện trong đề tài \textit{Kiểm thử tự động cho các các hệ thống hướng thành phần} do bạn Nguyễn Ngọc Thoại thực hiện dưới sự hướng dẫn của TS. Trần Thị Minh Châu. 
+Hệ thống hỗ trợ học viên cao học này sẽ được kiểm thử các chức năng một cách tự động được thực hiện trong đề tài 
+\textit{Kiểm thử tự động cho các các hệ thống hướng thành phần} do bạn Nguyễn Ngọc Thoại thực hiện dưới sự hướng dẫn của TS. Trần Thị Minh Châu. 
 \section{Triển khai hệ thống}
 Các thành phần của hệ thống sẽ được triển khai trên một môi trường tích hợp là Apache Servicemix \cite{servicemix} tích hợp Apache Felix và các thành phần của Apache Aries và OpenJPA và Web server Jetty \cite{jetty} để xử lý tương tác trên nền web. Cơ sở dữ liệu của hệ thống sẽ được lưu trữ sử dụng hệ quản trị cơ sở dữ liệu quan hệ MySQL.\\
 
